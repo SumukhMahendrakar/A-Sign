@@ -1,0 +1,14 @@
+fastapi
+uvicorn[standard]
+sqlalchemy
+PyJWT
+passlib[bcrypt]
+python-multipart
+pydantic
+pydantic-settings
+mistralai
+reportlab
+Pillow
+aiofiles
+python-dotenv
+httpx
