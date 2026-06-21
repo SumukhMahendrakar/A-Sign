@@ -69,12 +69,12 @@ export default function OngoingOrders() {
           <h2 className="text-3xl font-bold tracking-tight text-slate-800 font-display">Ongoing Orders</h2>
           <p className="text-xs text-slate-400 font-medium mt-1">Manage and track your active estamp and signing workflows</p>
         </div>
-        
+
         {/* Profile Card */}
         <div className="flex items-center gap-3 bg-white border border-slate-100 py-1.5 pl-3 pr-4 rounded-full shadow-sm">
-          <img 
-            src={vendor.avatar_url || "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=100&q=80"} 
-            alt="Rahul" 
+          <img
+            src={vendor.avatar_url || "https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small/default-avatar-profile-icon-of-social-media-user-vector.jpg"}
+            alt="Rahul"
             className="w-10 h-10 rounded-full object-cover border border-slate-200"
           />
           <div>
@@ -97,7 +97,7 @@ export default function OngoingOrders() {
             <h3 className="text-lg font-bold text-slate-800">All Caught Up!</h3>
             <p className="text-sm text-slate-400 mt-1 max-w-sm">There are no ongoing orders right now. Accept an incoming order on the Home dashboard to begin.</p>
           </div>
-          <button 
+          <button
             onClick={() => navigate('/dashboard')}
             className="mt-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 px-6 rounded-xl text-sm transition-all shadow-md hover:shadow-blue-100"
           >
@@ -108,7 +108,7 @@ export default function OngoingOrders() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {ongoingOrders.map(o => (
             <div key={o.ref_no} className="bg-white border border-slate-100 rounded-2xl shadow-sm p-6 flex flex-col justify-between hover:shadow-md transition-shadow">
-              
+
               <div>
                 <div className="flex justify-between items-start mb-4 border-b border-slate-100 pb-3">
                   <div>
@@ -143,14 +143,14 @@ export default function OngoingOrders() {
 
               {/* Action Buttons */}
               <div className="mt-6 pt-4 border-t border-slate-100 flex gap-3">
-                <button 
+                <button
                   onClick={() => navigate(`/order/${o.ref_no}`)}
                   className="flex-grow bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-600 font-bold py-2 px-4 rounded-xl text-xs transition-colors"
                 >
                   View Details
                 </button>
-                
-                <button 
+
+                <button
                   onClick={() => handleSimulateStep(o.ref_no, o.status)}
                   disabled={stepping}
                   className="flex-grow bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-xl text-xs transition-all shadow-md flex items-center justify-center gap-1"

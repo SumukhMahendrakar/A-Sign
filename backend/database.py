@@ -112,7 +112,7 @@ def seed_db(db):
         vendor = VendorProfile(
             vendor_id="12t37211",
             name="Rahul Luhar",
-            avatar_url="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=100&q=80",
+            avatar_url="https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small/default-avatar-profile-icon-of-social-media-user-vector.jpg",
             current_balance=3600.0,
             amount_withdrawn=5400.0,
             orders_completed=216,
@@ -129,7 +129,7 @@ def seed_db(db):
                 ref_no="HJGJ7867868",
                 token_name="Rent Agreement",
                 amount=250.0,
-                date="12/05/2023",
+                date="12/05/2026",
                 status="Pending",
                 time_received="11:16am",
                 time_left="1hr 23mins",
@@ -138,20 +138,20 @@ def seed_db(db):
                 ]),
                 pdf_filename="ResidentialRentalAgreement.pdf",
                 form_data=json.dumps({
-                    "city": "Chennai",
-                    "state": "Tamil Nadu",
+                    "city": "Kochi",
+                    "state": "Kerala",
                     "date": "12",
                     "month": "May",
-                    "year": "2023",
+                    "year": "2026",
                     "landlord_name": "P. Chandrasekhar",
-                    "landlord_address": "New No.11, Old No.8, 2nd Street, Mangalapuram, Chetpet, Chennai - 31"
+                    "landlord_address": "New No.11, Old No.8, 2nd Street, Ernakulam, Kochi - 682031"
                 })
             ),
             Order(
                 ref_no="HJGJ7867869",
                 token_name="Rent Agreement",
                 amount=250.0,
-                date="11/03/2022",
+                date="11/03/2026",
                 status="Out for Delivery",
                 time_received="10:00am",
                 time_left="0mins",
@@ -163,11 +163,11 @@ def seed_db(db):
                 ]),
                 pdf_filename="ResidentialRentalAgreement.pdf",
                 form_data=json.dumps({
-                    "city": "Chennai",
-                    "state": "Tamil Nadu",
+                    "city": "Kochi",
+                    "state": "Kerala",
                     "date": "11",
                     "month": "March",
-                    "year": "2022",
+                    "year": "2026",
                     "landlord_name": "Rahul Luhar",
                     "landlord_address": "123 Street"
                 })
@@ -181,7 +181,7 @@ def seed_db(db):
                     ref_no=f"HJGJ786787{i}",
                     token_name="Rent Agreement",
                     amount=250.0,
-                    date="11/03/2022",
+                    date="11/03/2026",
                     status="Completed",
                     time_received="09:00am",
                     time_left="0mins",
@@ -194,11 +194,11 @@ def seed_db(db):
                     ]),
                     pdf_filename="ResidentialRentalAgreement.pdf",
                     form_data=json.dumps({
-                        "city": "Chennai",
-                        "state": "Tamil Nadu",
+                        "city": "Kochi",
+                        "state": "Kerala",
                         "date": "11",
                         "month": "March",
-                        "year": "2022",
+                        "year": "2026",
                         "landlord_name": "Rahul Luhar",
                         "landlord_address": "123 Street"
                     })

@@ -12,15 +12,15 @@ import MobileSimulator from './pages/MobileSimulator';
 import OngoingOrders from './pages/OngoingOrders';
 import InboxPage from './pages/Inbox';
 import Transactions from './pages/Transactions';
-import { 
-  Home, 
-  Layers, 
-  Inbox, 
-  CheckSquare, 
-  CircleDollarSign, 
-  LogOut, 
-  Phone, 
-  Smartphone 
+import {
+  Home,
+  Layers,
+  Inbox,
+  CheckSquare,
+  CircleDollarSign,
+  LogOut,
+  Phone,
+  Smartphone
 } from 'lucide-react';
 
 const ProtectedRoute = ({ children }) => {
@@ -31,7 +31,7 @@ const ProtectedRoute = ({ children }) => {
 function AppContent() {
   const { token, logout } = useAuthStore();
   const location = useLocation();
-  
+
   const isAuthPage = location.pathname === '/' || location.pathname === '/login';
 
   if (token && !isAuthPage) {
@@ -49,45 +49,45 @@ function AppContent() {
 
             {/* Nav Menu */}
             <nav className="mt-4 flex flex-col gap-1">
-              <Link 
-                to="/dashboard" 
+              <Link
+                to="/dashboard"
                 className={`sidebar-link ${location.pathname === '/dashboard' ? 'active' : ''}`}
               >
                 <Home size={18} />
                 <span className="flex-grow">Home</span>
                 <span className="bg-blue-100 text-blue-600 text-xs font-bold px-2 py-0.5 rounded-full shrink-0">1</span>
               </Link>
-              <Link 
-                to="/ongoing" 
+              <Link
+                to="/ongoing"
                 className={`sidebar-link ${location.pathname === '/ongoing' ? 'active' : ''}`}
               >
                 <Layers size={18} />
                 <span>Ongoing Order</span>
               </Link>
-              <Link 
-                to="/inbox" 
+              <Link
+                to="/inbox"
                 className={`sidebar-link ${location.pathname === '/inbox' ? 'active' : ''}`}
               >
                 <Inbox size={18} />
                 <span>Inbox</span>
               </Link>
-              <Link 
-                to="/completed" 
+              <Link
+                to="/completed"
                 className={`sidebar-link ${location.pathname === '/completed' ? 'active' : ''}`}
               >
                 <CheckSquare size={18} />
                 <span>Completed</span>
               </Link>
-              <Link 
-                to="/transactions" 
+              <Link
+                to="/transactions"
                 className={`sidebar-link ${location.pathname === '/transactions' ? 'active' : ''}`}
               >
                 <CircleDollarSign size={18} />
                 <span>Transaction</span>
               </Link>
               <div className="h-px bg-slate-100 my-4 mx-6"></div>
-              <Link 
-                to="/mobile-sim" 
+              <Link
+                to="/mobile-sim"
                 className={`sidebar-link ${location.pathname === '/mobile-sim' ? 'active' : ''}`}
               >
                 <Smartphone size={18} className="text-indigo-500 animate-bounce" />
@@ -98,7 +98,7 @@ function AppContent() {
 
           {/* Bottom Sidebar */}
           <div className="p-6 flex flex-col gap-6">
-            <button 
+            <button
               onClick={logout}
               className="flex items-center gap-3 text-slate-500 hover:text-red-600 font-medium px-4 py-2 rounded-lg hover:bg-slate-50 transition-colors w-full text-left"
             >
@@ -108,8 +108,8 @@ function AppContent() {
 
             <div className="bg-slate-50 rounded-xl p-4 border border-slate-100">
               <p className="text-xs text-slate-400 font-semibold mb-2">Need Help?</p>
-              <a 
-                href="tel:9876543210" 
+              <a
+                href="tel:9876543210"
                 className="flex items-center gap-2 text-sm text-blue-600 hover:text-blue-700 font-bold"
               >
                 <Phone size={14} className="fill-blue-100" />
@@ -146,10 +146,10 @@ function AppContent() {
         <div className="max-w-6xl mx-auto px-4 flex justify-between items-center">
           <h1 className="text-2xl font-bold tracking-wide flex items-center gap-2">
             <span className="bg-white text-blue-900 w-8 h-8 rounded-lg flex items-center justify-center font-display font-black">अ</span>
-            3SIGN Legal
+            SIGN Legal
           </h1>
           {token && (
-            <button 
+            <button
               onClick={logout}
               className="text-sm bg-white/10 hover:bg-white/20 border border-white/20 px-4 py-2 rounded-lg transition-colors font-medium"
             >

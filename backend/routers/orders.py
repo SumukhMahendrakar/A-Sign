@@ -75,7 +75,7 @@ def get_vendor_stats(current_user_id: str = Depends(get_current_user), db: Sessi
         vendor = VendorProfile(
             vendor_id=current_user_id,
             name=user_name,
-            avatar_url="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=100&q=80",
+            avatar_url="https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small/default-avatar-profile-icon-of-social-media-user-vector.jpg",
             current_balance=3600.0,
             amount_withdrawn=5400.0,
             orders_completed=216,
@@ -176,7 +176,7 @@ def accept_order(ref_no: str, current_user_id: str = Depends(get_current_user), 
         vendor = VendorProfile(
             vendor_id=current_user_id,
             name=user_name,
-            avatar_url="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=100&q=80",
+            avatar_url="https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small/default-avatar-profile-icon-of-social-media-user-vector.jpg",
             current_balance=3600.0,
             amount_withdrawn=5400.0,
             orders_completed=216,

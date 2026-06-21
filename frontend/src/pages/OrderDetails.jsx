@@ -1,6 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Download, FileText } from 'lucide-react';
+import html2canvas from 'html2canvas';
+import { jsPDF } from 'jspdf';
 import api from '../api/client';
 
 export default function OrderDetails() {
@@ -13,6 +15,8 @@ export default function OrderDetails() {
     avatar_url: ""
   });
   const [loading, setLoading] = useState(true);
+  const [downloading, setDownloading] = useState(false);
+  const stampPaperRef = useRef(null);
 
   useEffect(() => {
     // Fetch stats for profile header
@@ -51,11 +55,11 @@ export default function OrderDetails() {
 
   return (
     <div className="p-8 max-w-5xl mx-auto w-full flex-grow flex flex-col gap-6">
-      
+
       {/* Top Navigation & Profile Bar */}
       <div className="flex justify-between items-center">
         {/* Back navigation button */}
-        <button 
+        <button
           onClick={() => navigate(-1)}
           className="w-10 h-10 rounded-full bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center shadow-lg hover:shadow-blue-200 transition-all"
         >
@@ -64,9 +68,9 @@ export default function OrderDetails() {
 
         {/* Profile Card */}
         <div className="flex items-center gap-3 bg-white border border-slate-100 py-1.5 pl-3 pr-4 rounded-full shadow-sm">
-          <img 
-            src={vendor.avatar_url || "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=100&q=80"} 
-            alt="Rahul Luhar" 
+          <img
+            src={vendor.avatar_url || "https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small/default-avatar-profile-icon-of-social-media-user-vector.jpg"}
+            alt="Rahul Luhar"
             className="w-10 h-10 rounded-full object-cover border border-slate-200"
           />
           <div>
@@ -84,41 +88,44 @@ export default function OrderDetails() {
         </div>
 
         <div className="text-right">
-          <span className={`text-[11px] font-bold px-3 py-1 rounded-full ${
-            order.status === 'Completed' ? 'bg-green-50 text-green-600' :
+          <span className={`text-[11px] font-bold px-3 py-1 rounded-full ${order.status === 'Completed' ? 'bg-green-50 text-green-600' :
             order.status === 'Pending' ? 'bg-indigo-50 text-indigo-600' :
-            'bg-blue-50 text-blue-600'
-          }`}>
+              'bg-blue-50 text-blue-600'
+            }`}>
             {order.status}
           </span>
           <span className="block text-[11px] text-slate-400 font-semibold mt-1">{order.date}</span>
         </div>
       </div>
 
-      {/* Stamp Paper Preview Wrapper (Image 1) */}
+      {/* Stamp Paper Preview Wrapper */}
       <div className="stamp-paper-container">
-        <div className="stamp-paper">
-          {/* INDIAN NON-JUDICIAL Stamp header */}
+        <div className="stamp-paper" ref={stampPaperRef}>
+          {/* INDIAN NON-JUDICIAL Kerala Stamp header */}
           <div className="relative border-4 border-emerald-800 p-4 mb-8 text-center bg-emerald-50/50">
-            {/* Seal Graphic Left */}
-            <div className="absolute top-2 left-4 w-12 h-12 rounded-full border-2 border-dashed border-emerald-800 flex items-center justify-center opacity-60">
-              <span className="text-[6px] font-bold text-emerald-800 rotate-12">STATE OF TN</span>
+            {/* Seal Graphic Left — Kerala State Emblem */}
+            <div className="absolute top-2 left-4 w-14 h-14 rounded-full border-2 border-dashed border-emerald-800 flex items-center justify-center opacity-60">
+              <div className="text-center leading-tight">
+                <span className="block text-[5px] font-bold text-emerald-800">GOVT OF</span>
+                <span className="block text-[6px] font-bold text-emerald-800">KERALA</span>
+              </div>
             </div>
 
             {/* Main Header Text */}
             <h3 className="text-xl font-black text-emerald-950 tracking-[4px] uppercase font-display">
               India Non Judicial
             </h3>
-            
+            <p className="text-[9px] text-emerald-700 tracking-[2px] mt-0.5 font-semibold">ഇന്ത്യ നോൺ ജുഡീഷ്യൽ</p>
+
             <div className="flex justify-between items-center mt-2 px-10 text-[10px] text-emerald-800 font-bold">
-              <span>தமிழ்நாடு TAMIL NADU</span>
-              <span className="text-amber-800">P. Chandrasekar</span>
-              <span>02AB 335525</span>
+              <span>കേരളം KERALA</span>
+              <span className="text-amber-800">S. Vijayakumar</span>
+              <span>KL-07 482910</span>
             </div>
-            
+
             {/* Serial Number Right */}
             <div className="absolute top-2 right-4 border border-emerald-800 px-2 py-0.5 text-[8px] text-emerald-800 font-mono">
-              9899 / 30.5.2014
+              KL 4821 / {new Date().toLocaleDateString('en-IN')}
             </div>
           </div>
 
@@ -135,11 +142,11 @@ export default function OrderDetails() {
             <p className="mb-6">
               WHEREAS the Lessor is the absolute owner of the property located at <span className="highlight-var">[Property Address]</span> and has agreed to lease out the premises for a residential duration of <span className="highlight-var">[Duration Months]</span> months.
             </p>
-            
+
             <p className="mb-10">
               NOW THIS AGREEMENT WITNESSETH AS FOLLOWS:
             </p>
-            
+
             <ol className="list-decimal pl-6 flex flex-col gap-4 mb-16">
               <li>That the Lessee shall pay a monthly rent of <span className="highlight-var">Rs. [Monthly Rent]</span> on or before the 5th day of every calendar month.</li>
               <li>That the Lessee has deposited an interest-free security deposit of <span className="highlight-var">Rs. [Deposit Amount]</span> with the Lessor.</li>
@@ -177,9 +184,38 @@ export default function OrderDetails() {
           <span className="text-xs text-slate-400 font-bold uppercase tracking-wider">Total Value</span>
           <h3 className="text-xl font-extrabold text-blue-600 mt-1">Amount: Rs{Math.round(order.amount)}</h3>
         </div>
-        <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 px-6 rounded-xl shadow transition-all flex items-center gap-2 text-sm">
-          <Download size={16} />
-          <span>Download PDF</span>
+        <button
+          onClick={async () => {
+            if (!stampPaperRef.current) return;
+            setDownloading(true);
+            try {
+              const canvas = await html2canvas(stampPaperRef.current, {
+                scale: 2,
+                useCORS: true,
+                backgroundColor: '#fffaf0',
+              });
+              const imgData = canvas.toDataURL('image/png');
+              const pdf = new jsPDF('p', 'mm', 'a4');
+              const pdfWidth = pdf.internal.pageSize.getWidth();
+              const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+              pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+              pdf.save(`${order.ref_no}_stamp_paper.pdf`);
+            } catch (err) {
+              console.error('PDF generation failed:', err);
+              alert('Failed to generate PDF. Please try again.');
+            } finally {
+              setDownloading(false);
+            }
+          }}
+          disabled={downloading}
+          className="bg-blue-600 hover:bg-blue-700 disabled:opacity-60 disabled:cursor-wait text-white font-bold py-2.5 px-6 rounded-xl shadow transition-all flex items-center gap-2 text-sm"
+        >
+          {downloading ? (
+            <div className="animate-spin rounded-full h-4 w-4 border-t-2 border-b-2 border-white"></div>
+          ) : (
+            <Download size={16} />
+          )}
+          <span>{downloading ? 'Generating...' : 'Download PDF'}</span>
         </button>
       </div>
 

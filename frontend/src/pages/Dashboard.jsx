@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { 
-  Wallet, 
-  ArrowUpRight, 
-  TrendingUp, 
-  Clock, 
-  MapPin, 
-  Play, 
-  ChevronRight, 
+import {
+  Wallet,
+  ArrowUpRight,
+  TrendingUp,
+  Clock,
+  MapPin,
+  Play,
+  ChevronRight,
   CheckCircle,
   AlertCircle
 } from 'lucide-react';
@@ -107,12 +107,12 @@ export default function Dashboard() {
         <div>
           <h2 className="text-3xl font-bold tracking-tight text-slate-800">Home</h2>
         </div>
-        
+
         {/* Profile Card */}
         <div className="flex items-center gap-3 bg-white border border-slate-100 py-1.5 pl-3 pr-4 rounded-full shadow-sm">
-          <img 
-            src={stats.avatar_url || "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=100&q=80"} 
-            alt="Rahul Luhar" 
+          <img
+            src={stats.avatar_url || "https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small/default-avatar-profile-icon-of-social-media-user-vector.jpg"}
+            alt="Rahul Luhar"
             className="w-10 h-10 rounded-full object-cover border border-slate-200"
           />
           <div>
@@ -138,13 +138,13 @@ export default function Dashboard() {
                   </h3>
                   <span className="text-xs text-slate-400 font-medium">Ref Id: {pendingOrder.ref_no}</span>
                 </div>
-                
+
                 <div className="flex items-center gap-6 self-stretch md:self-auto justify-between md:justify-end">
                   <div className="text-right">
                     <span className="block text-xs text-slate-400 font-semibold uppercase">Payout</span>
                     <span className="text-2xl font-bold text-blue-600">Rs. {pendingOrder.amount}</span>
                   </div>
-                  <button 
+                  <button
                     onClick={handleAccept}
                     disabled={accepting}
                     className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 px-8 rounded-lg shadow-lg hover:shadow-blue-200 transition-all flex items-center gap-2 pulse-button disabled:opacity-50"
@@ -157,11 +157,11 @@ export default function Dashboard() {
               {/* Progress Slider representing remaining acceptance window */}
               <div className="mt-6">
                 <div className="relative h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
-                  <div 
-                    className="absolute top-0 left-0 h-full bg-red-500 transition-all duration-500" 
+                  <div
+                    className="absolute top-0 left-0 h-full bg-red-500 transition-all duration-500"
                     style={{ width: '65%' }}
                   ></div>
-                  <div 
+                  <div
                     className="absolute top-0 h-3 w-3 bg-red-500 border border-white rounded-full -translate-y-[2.5px] shadow"
                     style={{ left: '65%' }}
                   ></div>
@@ -193,7 +193,7 @@ export default function Dashboard() {
                   <h3 className="text-3xl font-extrabold text-slate-800 mt-1">₹ {stats.current_balance}</h3>
                 </div>
               </div>
-              <Link 
+              <Link
                 to="/completed"
                 className="w-10 h-10 rounded-full bg-slate-50 border border-slate-100 text-slate-400 hover:text-blue-600 hover:bg-blue-50 transition-colors flex items-center justify-center"
               >
@@ -220,10 +220,10 @@ export default function Dashboard() {
 
           {/* Statistics and Ongoing Timeline layout */}
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-            
+
             {/* Left Column: Stats & Recent Orders Table (Col span 3) */}
             <div className="lg:col-span-3 flex flex-col gap-6">
-              
+
               {/* Statistics Panel */}
               <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6">
                 <h3 className="text-base font-bold text-slate-800 mb-4">Statistics</h3>
@@ -251,7 +251,7 @@ export default function Dashboard() {
                     View all
                   </Link>
                 </div>
-                
+
                 {/* Orders Table */}
                 <div className="overflow-x-auto">
                   <table className="w-full text-left border-collapse">
@@ -265,8 +265,8 @@ export default function Dashboard() {
                     </thead>
                     <tbody>
                       {orders.slice(0, 3).map(o => (
-                        <tr 
-                          key={o.ref_no} 
+                        <tr
+                          key={o.ref_no}
                           onClick={() => navigate(`/order/${o.ref_no}`)}
                           className="hover:bg-slate-50 border-b border-slate-100 cursor-pointer transition-colors"
                         >
@@ -274,12 +274,11 @@ export default function Dashboard() {
                           <td className="py-4 px-6 text-sm text-slate-400 font-medium">{o.ref_no}</td>
                           <td className="py-4 px-6 text-sm text-slate-500">{o.date}</td>
                           <td className="py-4 px-6 text-center">
-                            <span className={`text-[11px] font-bold px-3 py-1 rounded-full ${
-                              o.status === 'Completed' ? 'bg-green-50 text-green-600' :
+                            <span className={`text-[11px] font-bold px-3 py-1 rounded-full ${o.status === 'Completed' ? 'bg-green-50 text-green-600' :
                               o.status === 'Pending' ? 'bg-indigo-50 text-indigo-600' :
-                              o.status === 'Accepted' ? 'bg-blue-50 text-blue-600' :
-                              'bg-slate-100 text-slate-600'
-                            }`}>
+                                o.status === 'Accepted' ? 'bg-blue-50 text-blue-600' :
+                                  'bg-slate-100 text-slate-600'
+                              }`}>
                               {o.status === 'Out for Delivery' ? 'Out for Delivery' : o.status}
                             </span>
                           </td>
@@ -296,18 +295,17 @@ export default function Dashboard() {
               <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 h-full flex flex-col justify-between">
                 <div>
                   <h3 className="text-base font-bold text-slate-800 mb-6">Ongoing Order</h3>
-                  
+
                   {ongoingOrder ? (
                     <div className="flex flex-col gap-6 relative before:absolute before:left-3 before:top-2 before:h-[calc(100%-16px)] before:w-0.5 before:bg-slate-100">
                       {JSON.parse(ongoingOrder.timeline_json || "[]").map((item, idx) => (
                         <div key={idx} className="flex gap-4 items-start relative z-10">
                           {/* Timeline dot */}
-                          <div className={`w-6 h-6 rounded-full shrink-0 flex items-center justify-center border-4 border-white shadow ${
-                            item.active ? 'bg-blue-600 text-white' : 'bg-slate-200'
-                          }`}>
+                          <div className={`w-6 h-6 rounded-full shrink-0 flex items-center justify-center border-4 border-white shadow ${item.active ? 'bg-blue-600 text-white' : 'bg-slate-200'
+                            }`}>
                             {item.active && <CheckCircle size={10} className="fill-current" />}
                           </div>
-                          
+
                           <div className="flex-grow">
                             <span className="text-[11px] text-slate-400 font-bold block">{item.time}</span>
                             <h4 className="text-sm font-bold text-slate-800 mt-0.5">{item.title}</h4>
@@ -331,14 +329,14 @@ export default function Dashboard() {
                 {/* Simulated Order Walkthrough Trigger */}
                 {ongoingOrder && ongoingOrder.status !== 'Completed' && (
                   <div className="mt-8 pt-4 border-t border-slate-100">
-                    <button 
+                    <button
                       onClick={() => handleSimulateStep(ongoingOrder.ref_no, ongoingOrder.status)}
                       disabled={stepping}
                       className="w-full bg-slate-50 border border-slate-200 text-slate-600 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 font-semibold py-2.5 px-4 rounded-xl text-sm transition-all flex items-center justify-center gap-2"
                     >
                       <Play size={14} />
-                      {stepping ? 'Processing...' : 
-                       ongoingOrder.status === 'Accepted' ? 'Simulate Dispatch' : 'Simulate Delivery Completion'}
+                      {stepping ? 'Processing...' :
+                        ongoingOrder.status === 'Accepted' ? 'Simulate Dispatch' : 'Simulate Delivery Completion'}
                     </button>
                   </div>
                 )}

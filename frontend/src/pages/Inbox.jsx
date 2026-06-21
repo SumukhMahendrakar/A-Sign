@@ -8,7 +8,7 @@ export default function Inbox() {
   const [contacts, setContacts] = useState([
     {
       name: "Aman (Client)",
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80",
+      avatar: "https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small/default-avatar-profile-icon-of-social-media-user-vector.jpg",
       role: "Client",
       lastMessage: "I signed the rental agreement canvas. Please review.",
       unread: true,
@@ -22,7 +22,7 @@ export default function Inbox() {
     },
     {
       name: "Priyan (Stamping Desk)",
-      avatar: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=100&q=80",
+      avatar: "https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small/default-avatar-profile-icon-of-social-media-user-vector.jpg",
       role: "Operations Assistant",
       lastMessage: "Non-judicial stamp rolls replenished for KL series.",
       unread: false,
@@ -33,7 +33,7 @@ export default function Inbox() {
     },
     {
       name: "Kerala Registrar Desk",
-      avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=100&q=80",
+      avatar: "https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small/default-avatar-profile-icon-of-social-media-user-vector.jpg",
       role: "State Portal API",
       lastMessage: "System alert: Schedule IV templates updated.",
       unread: false,
@@ -66,7 +66,7 @@ export default function Inbox() {
     const updated = [...contacts];
     updated[activeContact].messages.push(newMsg);
     updated[activeContact].lastMessage = inputVal;
-    
+
     setContacts(updated);
     setInputVal('');
 
@@ -89,19 +89,19 @@ export default function Inbox() {
 
   return (
     <div className="p-8 max-w-5xl mx-auto w-full flex-grow flex flex-col gap-8 h-screen max-h-[850px]">
-      
+
       {/* Header Panel */}
       <div className="flex justify-between items-center shrink-0">
         <div>
           <h2 className="text-3xl font-bold tracking-tight text-slate-800 font-display">Inbox</h2>
           <p className="text-xs text-slate-400 font-medium mt-1">Communicate with clients and stamp roll desks in real time</p>
         </div>
-        
+
         {/* Profile Card */}
         <div className="flex items-center gap-3 bg-white border border-slate-100 py-1.5 pl-3 pr-4 rounded-full shadow-sm">
-          <img 
-            src={vendor.avatar_url || "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=100&q=80"} 
-            alt="Rahul" 
+          <img
+            src={vendor.avatar_url || "https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small/default-avatar-profile-icon-of-social-media-user-vector.jpg"}
+            alt="Rahul"
             className="w-10 h-10 rounded-full object-cover border border-slate-200"
           />
           <div>
@@ -113,15 +113,15 @@ export default function Inbox() {
 
       {/* Split Pane Chat Box */}
       <div className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden flex-grow flex h-0">
-        
+
         {/* Left Pane: Contacts List */}
         <div className="w-80 border-r border-slate-100 flex flex-col">
           <div className="p-4 border-b border-slate-100 shrink-0">
             <div className="relative">
               <Search className="absolute left-3 top-2.5 text-slate-400" size={16} />
-              <input 
-                type="text" 
-                placeholder="Search chats..." 
+              <input
+                type="text"
+                placeholder="Search chats..."
                 className="w-full pl-9 pr-4 py-2 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-blue-600 focus:outline-none"
               />
             </div>
@@ -129,15 +129,14 @@ export default function Inbox() {
 
           <div className="overflow-y-auto flex-grow">
             {contacts.map((c, idx) => (
-              <div 
+              <div
                 key={idx}
                 onClick={() => {
                   setActiveContact(idx);
                   c.unread = false;
                 }}
-                className={`p-4 flex gap-3 items-center border-b border-slate-50 cursor-pointer transition-colors ${
-                  activeContact === idx ? 'bg-blue-50/50' : 'hover:bg-slate-50/30'
-                }`}
+                className={`p-4 flex gap-3 items-center border-b border-slate-50 cursor-pointer transition-colors ${activeContact === idx ? 'bg-blue-50/50' : 'hover:bg-slate-50/30'
+                  }`}
               >
                 <img src={c.avatar} alt={c.name} className="w-11 h-11 rounded-full object-cover border border-slate-100" />
                 <div className="flex-grow min-w-0">
@@ -155,7 +154,7 @@ export default function Inbox() {
 
         {/* Right Pane: Message Area */}
         <div className="flex-grow flex flex-col bg-slate-50/30">
-          
+
           {/* Active Header */}
           <div className="p-4 bg-white border-b border-slate-100 flex justify-between items-center shrink-0">
             <div className="flex gap-3 items-center">
@@ -175,17 +174,15 @@ export default function Inbox() {
           {/* Chat Messages */}
           <div className="flex-grow overflow-y-auto p-6 flex flex-col gap-4">
             {contacts[activeContact].messages.map((m, idx) => (
-              <div 
-                key={idx} 
-                className={`max-w-[70%] flex flex-col gap-1 ${
-                  m.sender === 'vendor' ? 'self-end items-end' : 'self-start items-start'
-                }`}
+              <div
+                key={idx}
+                className={`max-w-[70%] flex flex-col gap-1 ${m.sender === 'vendor' ? 'self-end items-end' : 'self-start items-start'
+                  }`}
               >
-                <div className={`p-3.5 rounded-2xl text-xs leading-relaxed ${
-                  m.sender === 'vendor' 
-                    ? 'bg-blue-600 text-white rounded-tr-none' 
-                    : 'bg-white border border-slate-100 text-slate-700 rounded-tl-none shadow-xs'
-                }`}>
+                <div className={`p-3.5 rounded-2xl text-xs leading-relaxed ${m.sender === 'vendor'
+                  ? 'bg-blue-600 text-white rounded-tr-none'
+                  : 'bg-white border border-slate-100 text-slate-700 rounded-tl-none shadow-xs'
+                  }`}>
                   {m.text}
                 </div>
                 <span className="text-[9px] text-slate-400 font-semibold">{m.time}</span>
@@ -195,14 +192,14 @@ export default function Inbox() {
 
           {/* Input Footer */}
           <form onSubmit={handleSendMessage} className="p-4 bg-white border-t border-slate-100 flex gap-3 shrink-0">
-            <input 
-              type="text" 
+            <input
+              type="text"
               value={inputVal}
               onChange={e => setInputVal(e.target.value)}
               placeholder={`Write your reply to ${contacts[activeContact].name.split(' ')[0]}...`}
               className="flex-grow border border-slate-200 rounded-xl px-4 py-2 text-xs focus:ring-2 focus:ring-blue-600 focus:outline-none bg-slate-50"
             />
-            <button 
+            <button
               type="submit"
               className="w-10 h-10 rounded-xl bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center shadow transition-all shrink-0 cursor-pointer"
             >

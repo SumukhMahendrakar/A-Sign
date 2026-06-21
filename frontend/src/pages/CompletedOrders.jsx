@@ -38,12 +38,12 @@ export default function CompletedOrders() {
         <div>
           <h2 className="text-3xl font-bold tracking-tight text-blue-600 font-display">Completed</h2>
         </div>
-        
+
         {/* Profile Card */}
         <div className="flex items-center gap-3 bg-white border border-slate-100 py-1.5 pl-3 pr-4 rounded-full shadow-sm">
-          <img 
-            src={stats.avatar_url || "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=100&q=80"} 
-            alt="Rahul Luhar" 
+          <img
+            src={stats.avatar_url || "https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small/default-avatar-profile-icon-of-social-media-user-vector.jpg"}
+            alt="Rahul Luhar"
             className="w-10 h-10 rounded-full object-cover border border-slate-200"
           />
           <div>
@@ -80,7 +80,7 @@ export default function CompletedOrders() {
               </thead>
               <tbody>
                 {completedOrders.map((o, idx) => (
-                  <tr 
+                  <tr
                     key={idx}
                     onClick={() => navigate(`/order/${o.ref_no}`)}
                     className="hover:bg-slate-50 border-b border-slate-100 cursor-pointer transition-colors"
@@ -102,7 +102,7 @@ export default function CompletedOrders() {
       </div>
 
       {/* Floating Notification Box at Bottom Right (Image 2) */}
-      <Link 
+      <Link
         to="/dashboard"
         className="fixed bottom-8 right-8 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl py-3 px-6 shadow-xl flex items-center gap-3 transition-transform hover:-translate-y-1 hover:shadow-blue-200 cursor-pointer max-w-[240px]"
       >

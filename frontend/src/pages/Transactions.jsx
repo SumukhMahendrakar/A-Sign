@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import { 
-  CircleDollarSign, 
-  ArrowUpRight, 
-  ArrowDownLeft, 
-  Wallet, 
-  TrendingUp, 
+import {
+  CircleDollarSign,
+  ArrowUpRight,
+  ArrowDownLeft,
+  Wallet,
+  TrendingUp,
   ArrowUpCircle,
-  X 
+  X
 } from 'lucide-react';
 import api from '../api/client';
 
@@ -38,11 +38,11 @@ export default function Transactions() {
     try {
       const res = await api.get('/orders/stats');
       setVendor(res.data);
-      
+
       // Load credits dynamically from database completed orders!
       const ordersRes = await api.get('/orders/');
       const completed = ordersRes.data.filter(o => o.status === 'Completed');
-      
+
       // Map completed orders to credit logs
       const credits = completed.map((o, idx) => ({
         id: `TXN-${strPad(completed.length - idx)}`,
@@ -93,7 +93,7 @@ export default function Transactions() {
     setError('');
     try {
       await api.post('/orders/withdraw', { amount: amountNum });
-      
+
       // Create local ledger debit log
       const newDisbursal = {
         id: `TXN-WDR-${strPad(ledger.length + 1)}`,
@@ -108,7 +108,7 @@ export default function Transactions() {
       setLedger([newDisbursal, ...ledger]);
       setIsModalOpen(false);
       setWithdrawAmount('');
-      
+
       // Reload stats
       await fetchStats();
     } catch (err) {
@@ -121,19 +121,19 @@ export default function Transactions() {
 
   return (
     <div className="p-8 max-w-5xl mx-auto w-full flex-grow flex flex-col gap-8">
-      
+
       {/* Header Panel */}
       <div className="flex justify-between items-center">
         <div>
           <h2 className="text-3xl font-bold tracking-tight text-slate-800 font-display">Transaction Log</h2>
           <p className="text-xs text-slate-400 font-medium mt-1">Audit trail of stamp payouts, ledger credits, and cashouts</p>
         </div>
-        
+
         {/* Profile Card */}
         <div className="flex items-center gap-3 bg-white border border-slate-100 py-1.5 pl-3 pr-4 rounded-full shadow-sm">
-          <img 
-            src={vendor.avatar_url || "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=100&q=80"} 
-            alt="Rahul" 
+          <img
+            src={vendor.avatar_url || "https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small/default-avatar-profile-icon-of-social-media-user-vector.jpg"}
+            alt="Rahul"
             className="w-10 h-10 rounded-full object-cover border border-slate-200"
           />
           <div>
@@ -162,7 +162,7 @@ export default function Transactions() {
                   <Wallet size={20} />
                 </div>
               </div>
-              <button 
+              <button
                 onClick={() => setIsModalOpen(true)}
                 className="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 px-4 rounded-xl text-xs transition-all shadow hover:shadow-blue-200 flex items-center justify-center gap-1 cursor-pointer"
               >
@@ -209,7 +209,7 @@ export default function Transactions() {
             <div className="p-6 border-b border-slate-100">
               <h3 className="text-base font-bold text-slate-800">Ledger Statement</h3>
             </div>
-            
+
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead>
@@ -229,9 +229,8 @@ export default function Transactions() {
                       <td className="py-4 px-6 text-xs font-bold text-slate-800">{txn.desc}</td>
                       <td className="py-4 px-6 text-xs text-slate-400 font-semibold">{txn.ref}</td>
                       <td className="py-4 px-6 text-xs font-bold">
-                        <span className={`flex items-center gap-0.5 ${
-                          txn.type === 'credit' ? 'text-green-600' : 'text-red-500'
-                        }`}>
+                        <span className={`flex items-center gap-0.5 ${txn.type === 'credit' ? 'text-green-600' : 'text-red-500'
+                          }`}>
                           {txn.type === 'credit' ? <ArrowDownLeft size={12} /> : <ArrowUpRight size={12} />}
                           ₹{txn.amount}
                         </span>
@@ -255,7 +254,7 @@ export default function Transactions() {
       {isModalOpen && (
         <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center z-50 animate-fade-in p-4">
           <div className="bg-white rounded-2xl border border-slate-100 shadow-2xl max-w-sm w-full p-6 relative">
-            <button 
+            <button
               onClick={() => {
                 setIsModalOpen(false);
                 setWithdrawAmount('');
@@ -278,7 +277,7 @@ export default function Transactions() {
             <form onSubmit={handleWithdraw} className="mt-6 flex flex-col gap-4">
               <div>
                 <label className="block text-[10px] font-bold text-slate-400 uppercase mb-1.5">Amount (INR)</label>
-                <input 
+                <input
                   type="number"
                   required
                   placeholder="e.g. 500"
@@ -289,7 +288,7 @@ export default function Transactions() {
                 <span className="text-[10px] text-slate-400 mt-1 block">Available balance: ₹{vendor.current_balance}</span>
               </div>
 
-              <button 
+              <button
                 type="submit"
                 disabled={withdrawing || !withdrawAmount}
                 className="mt-2 w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-xl text-xs transition-all shadow-md disabled:opacity-50 flex items-center justify-center"
